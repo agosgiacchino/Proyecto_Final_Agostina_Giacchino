@@ -24,16 +24,77 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>´
-                <a class="navbar-brand" href="{% url 'Nomades' %}">Nomades</a>
-                <a class="navbar-brand" href="{% url 'Cursos' %}">Cursos</a>
-                <a class="navbar-brand" href="{% url 'Usuarios' %}">Usuarios</a>
-                <a class="navbar-brand" href="{% url 'Viajes' %}">Viajes</a>
-                <a class="btn btn-primary" href="#NADAAUN">INICIAR</a>
+                <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                <a class="navbar-brand" href="{% url 'AgregarCurso' %}">AgregarCurso</a>
+                <a class="navbar-brand" href="{% url 'ListaCursos' %}">ListaCursos</a>
+                <a class="navbar-brand" href="{% url 'AgregarNomade' %}">AgregarNomade</a>
+                <a class="navbar-brand" href="{% url 'ListaNomades' %}">ListaNomades</a>
+                <a class="navbar-brand" href="{% url 'Foro' %}">Foro</a>
+                <a class="navbar-brand" href="{% url 'AboutMe' %}">AboutMe</a>
             </div>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'Perfil' %}">Perfil</a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'AppMensajes:Inbox' %}">Mensajes</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">    
+            {% if user.is_authenticated %}
+                {% if url %}
+                    <img height="60px" src="{{url}}" alt="avatar">
+                {% endif %}
+                <p>Bienvenido {{user.username}}</p>
+                <a class="nav-link page-scroll d-flex flex-row align-items-center text-primary" href="{% url 'Logout' %}">
+                    <em data-feather="layout" width="18" height="18" class="mr-2"></em>
+                    LOGOUT
+                </a>
+            {% else %}
+                <a class="nav-link page-scroll d-flex flex-row align-items-center text-primary" href="{% url 'Login' %}">
+                    <em data-feather="layout" width="18" height="18" class="mr-2"></em>
+                    LOGIN
+                </a>
+            {% endif %}
+            </li>
+
+        </ul>
+    </div>
         </nav>
-
-
+    </div>
+</section>
+{% if user.is_authenticated %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+<!--hero header-->
+{% if not user.is_authenticated %}
+<section class="py-7 py-md-0 bg-hero" id="home">
+    <div class="container">
+        <div class="row vh-md-100">
+            <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                <h1 class="heading-black text-capitalize">Agregá los cursos para Nomades Digitales que te gustaria dictar</h1>
+                <p class="lead py-3">Puedes hablar y debatir en el foro sobre estos cursos o directamente hablar con tus amigos. Clickeá en Features o scrolleá hacia abajo para acceder a lo que quieras.</p>
+                <a class="btn btn-primary d-inline-flex flex-row align-items-center" href="{% url 'RegistroUsuarios' %}">
+                    CREAR USUARIO
+                    <em class="ml-2" data-feather="arrow-right"></em>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+   
         <!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">
@@ -60,14 +121,57 @@
 
 
         <!-- Esto es lo que va a cambiar-->
-
-        {% block contenidoQueCambia %}
-
-        {% endblock %}
-
-
+        {% block contenidoQCambia %}
+            
+        {% endblock contenidoQCambia %}
         
-     
+        <section class="pt-6 pb-7" id="features">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-md-10 mx-auto">
+                        <div class="row feature-boxes">
+                            <div class="col-md-6 box">
+                                <div class="icon-box box-primary">
+                                    <a href="{% url 'ListaCursos' %}">
+                                        <div class="icon-box-inner">
+                                            <span data-feather="edit-3" width="35" height="35"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <h5>Lista de cursos actuales</h5>
+                                <p class="text-muted">Acá vas a poder ver los cursos que hay hoy en dia en el Blog.</p>
+                            </div>
+                            <div class="col-md-6 box">
+                                <div class="icon-box box-danger">
+                                    <a href="{% url 'Foro' %}">
+                                        <div class="icon-box-inner">
+                                            <span data-feather="layout" width="35" height="35"></span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <h5>Foro</h5>
+                                <p class="text-muted">Discutí y charla sobre temas variados a los cursos en este foro.</p>
+                            </div>
+                            <div class="col-md-6 box">
+                                <div class="icon-box box-info">
+                                    <a href="{% url 'AppMensajes:Inbox' %}">
+                                        <div class="icon-box-inner">
+                                            <span data-feather="globe" width="35" height="35"></span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <h5>Chat con amigos</h5>
+                                <p class="text-muted">Chateá con tus amigos por mensajes privados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-6">
+                    </div>
+                </div>
+            </div>
+        </section>
+           
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">

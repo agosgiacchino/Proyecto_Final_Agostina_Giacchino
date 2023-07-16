@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'AppNomads',
     'AppMensajes',
+    'AppRegistro',
+    'AppPerfiles',
+    'AppLogin',
+
 ]
 
 MIDDLEWARE = [

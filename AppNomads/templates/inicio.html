@@ -1,0 +1,41 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+    <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
+    <h1>Trabajar mientras viajas, el equilibrio que necesitas!</h1>
+  
+
+    <h3>Podes buscar el curso que queres hacer por su codigo:</h3>
+
+    <form action="/AppNomads/buscar/" method="GET">
+
+        <input type="number" name="codigo" id="codigo">
+
+        <input type="submit" value="buscar">
+
+
+
+
+    </form>
+
+    
+
+    {% if curso %}
+
+    <p>Estamos buscando el: {{codigo}}</p>
+
+    <ul>
+	{% for curso in cursos %}
+		<li> {{curso.nombre}} </li>
+		<li> {{curso.codigo}} </li>
+	{% endfor %}
+
+    </ul>
+
+    {% endif %}
+
+{% endblock %}

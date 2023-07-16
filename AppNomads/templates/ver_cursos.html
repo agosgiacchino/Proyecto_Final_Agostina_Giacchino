@@ -1,0 +1,61 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQCambia %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ver_cursos.css' %}">
+
+    <h1>Lista de cursos</h1>
+
+    <p class="ordenar-por">Ordenar por:</p>
+    <ul>
+        <li>
+            <form method="get" action="{% url 'ListaCursos' %}">
+                <input type="hidden" name="orden" value="codigo" />
+                <button type="submit">Codigo</button>
+            </form>
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="columna-nombre">Nombre</th>
+                <th class="columna-codigo">Codigo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curso in cursos %}
+                <tr>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.codigo }}</td>
+                    <td>
+                        <div style="display: flex; column-gap: 5px;">
+                            <form action="{% url 'EliminarCurso' curso.id %}" method="POST">{% csrf_token %}
+                                <button type="submit">Eliminar</button>
+                            </form>
+                            <button>
+                                <a href="{% url 'EditarCurso' curso.id %}">Editar</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+        {% url 'AgregarCurso' as url %}
+        <button type="button" onclick="window.location.href='{{ url }}'">Agregar Curso</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+        {% url 'AgregarNomade' as url %}
+        <button type="button" onclick="window.location.href='{{ url }}'">Agregar Nomade</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+        {% url 'ListaNomades' as url %}
+        <button type="button" onclick="window.location.href='{{ url }}'">Ver Nomades existentes</button>
+    </div>
+{% endblock contenidoQCambia %}

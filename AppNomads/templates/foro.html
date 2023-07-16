@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQCambia %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foro.css' %}">
+
+<div class="contenidoCentrado">
+  <h1>Foro</h1>
+  <ul>
+    {% for tema in temas %}
+      <li><a href="{% url 'DetalleViaje' viaje.pk %}">{{ viaje.nombre }}</a> - Creado por {{ viaje.creador.username }}</li>
+      <div style="display: flex; column-gap: 5px;">
+        <form action="{% url 'EliminarViaje' tema.pk %}" method="POST">{% csrf_token %}
+            <button type="submit">Eliminar</button>
+        </form>
+        <button>
+            <a href="{% url 'EditarViaje' viaje.pk %}">Editar</a>
+        </button>
+      </div>
+    {% empty %}
+      <li>No hay viajes disponibles.</li>
+    {% endfor %}
+  </ul>
+  <div style="margin-top: 20px;">
+    {% url 'CrearViaje' as url %}
+    <button type="button" onclick="window.location.href='{{ url }}'">Crear nuevo viaje</button>
+  </div>
+</div>
+{% endblock contenidoQCambia %}

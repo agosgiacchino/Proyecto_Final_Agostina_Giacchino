@@ -1,0 +1,39 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQCambia %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lista_nomades.css' %}">
+
+    <h1>Lista de Nomades</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="columna-nombre">Nombre</th>
+                <th class="columna-apellido">Apellido</th>
+                <th class="columna-email">Email</th>
+                <th class="columna-profesion">Profesion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nomade in nomades %}
+                <tr>
+                    <td>{{ nomade.nombre }}</td>
+                    <td>{{ nomade.apellido }}</td>
+                    <td>{{ nomade.email }}</td>
+                    <td>{{ nomade.profesion }}</td>
+                    <td>
+                        <div style="display: flex; column-gap: 5px;">
+                            <form action="{% url 'EliminarNomade' nomade.id %}" method="POST">{% csrf_token %}
+                                <button type="submit">Eliminar</button>
+                            </form>
+                            <button>
+                                <a href="{% url 'EditarNomade' nomade.id %}">Editar</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenidoQCambia %}

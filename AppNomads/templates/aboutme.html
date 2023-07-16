@@ -1,0 +1,27 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQCambia %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aboutme.css' %}">
+
+    <h1>Hola! Soy Julián Rosas Sandillú</h1>
+
+    <img class="center" height="400px" src="{% static 'css/foto.CV.jpeg' %}" alt="Imagen saludo">
+
+    <body>
+    <h5>Les voy a contar sobre mi!</h5>
+    <p>Mi nombre es Agostina, tengo 23 años y soy contadora.</p>
+	<p>Durante el 2023 estoy viajando y trabajando, asi que puedo decir que estoy cumpliendo mi sueño y estoy siendo una nomade digital :)</p>
+	<p>Si bien trabajo dentro del sector de Finanzas, la programacion siempre me llamo la atencion y siento que puede ser un gran complemento para mi trabajo. Por eso me anote en este curso de Coder.</p>
+    <p>Les dejo mis repositorios en GitHub!</p>
+
+    <div style="margin-top: 20px;"></div>
+    <a href="https://github.com/agosgiacchino" target="_blank"><button>Visitar Github</button></a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        {% url 'Inicio' as url %}
+        <button class="center" type="button" onclick="window.location.href='{{ url }}'">Volver a la Home</button>
+    </div>
+{% endblock contenidoQCambia %}
